@@ -1,0 +1,41 @@
+
+<br>
+
+<button class="btn btn-primary" routerLink="/producto/agregar" >Registrar Producto</button>
+
+<br>
+<br>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">UrlImagen</th>
+      <th scope="col">Fecha de vencimiento</th>
+      <th scope="col">Categoria</th>
+      <th scope="col">Proveedor</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let producto of productos">
+      <th scope="row">{{producto.id}}</th>
+      <td>{{producto.nombre}}</td>
+      <td>{{producto.descripcion}}</td>
+      <td>{{producto.precio}}</td>
+      <td>{{producto.cantidad}}</td>
+      <td>{{producto.urlImagen}}</td>
+      <td>{{producto.fechaVen}}</td>
+      <td>{{producto.categoria.nombre}}</td>
+      <td>{{producto.proveedor.nombre}}</td>
+      <td><a class="btn btn-primary" [routerLink]="['/producto/editar', producto.id]">Editar</a></td>
+                <td><button class="btn btn-danger" (click)="eliminarProducto(producto.id)">
+                        Eliminar
+                    </button></td>
+    </tr>
+  </tbody>
+</table>
