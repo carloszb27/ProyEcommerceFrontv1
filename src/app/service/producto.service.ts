@@ -16,11 +16,15 @@ export class ProductoService {
     return this.http.get<Producto[]>(this.baseUrl);
   }
 
+  public listarPorLote(id_lote: number): Observable<Producto> {
+    return this.http.get<Producto>(`${this.baseUrl}/lote/${id_lote}`);
+  }
+
   public registrar(producto: Producto): Observable<any> {
     return this.http.post<any>(this.baseUrl, producto);
   }
 
-  public buscar(id_prod: string): Observable<any> {
+  public buscar(id_prod: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id_prod}`);
   }
 
@@ -29,7 +33,7 @@ export class ProductoService {
     return this.http.put(`${this.baseUrl}`, producto);
   }
 
-  public eliminar(id_prod: string): Observable<any> {
+  public eliminar(id_prod: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id_prod}`);
   }
   

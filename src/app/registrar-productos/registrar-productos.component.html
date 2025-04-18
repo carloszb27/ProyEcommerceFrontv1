@@ -1,68 +1,79 @@
 <div class="container">
-    <form class="row g-3" (ngSubmit)="registrarProducto()">
-      <div class="col-12" *ngIf="edit==true">
-        <label for="id_prod" class="form-label">Código</label>
-        <input type="number" class="form-control" placeholder="0" 
-        id="id_prod" name="id_prod" [(ngModel)]="nuevoProducto.id">
-      </div>
-      <div class="col-12">
-        <label for="nom_prod" class="form-label">Nombre</label>
-        <input type="text" class="form-control" placeholder="Nombre"
-        id="nom_prod"  name="nom_prod" [(ngModel)]="nuevoProducto.nombre">
-      </div>
-      <div class="col-12">
-        <label for="des_prod" class="form-label">Descripcion</label>
-        <input type="text" class="form-control" placeholder="Descripcion"
-        id="des_prod"  name="des_prod" [(ngModel)]="nuevoProducto.descripcion">
-      </div>
-      <div class="col-12">
-        <label for="pre_prod" class="form-label">Precio</label>
-        <input type="number" class="form-control" placeholder="0"
-        id="pre_prod"  name="pre_prod" [(ngModel)]="nuevoProducto.precio">
-      </div>
-      <div class="col-12">
-        <label for="cant_prod" class="form-label">Cantidad</label>
-        <input type="number" class="form-control" placeholder="0"
-        id="cant_prod"  name="cant_prod" [(ngModel)]="nuevoProducto.cantidad">
-      </div>
-      <div class="col-12">
-        <label for="url_prod" class="form-label">Url Imagen</label>
-        <input type="text" class="form-control" placeholder="Url Imagen"
-        id="url_prod"  name="url_prod" [(ngModel)]="nuevoProducto.urlImagen">
-      </div>
+  <form class="row g-3" (ngSubmit)="registrarProducto()">
+    <!-- <div class="col-12" *ngIf="edit == true">
+      <label for="id_prod" class="form-label">Código</label>
+      <input type="number" class="form-control" placeholder="0" id="id_prod" name="id_prod"
+        [(ngModel)]="nuevoProducto.id" />
+    </div> -->
+    <div class="col-12">
+      <label for="nom_prod" class="form-label">Nombre</label>
+      <input type="text" class="form-control" placeholder="Nombre" id="nom_prod" name="nom_prod"
+        [(ngModel)]="nuevoProducto.nombre" />
+    </div>
+    <div class="col-12">
+      <label for="des_prod" class="form-label">Descripcion</label>
+      <input type="text" class="form-control" placeholder="Descripcion" id="des_prod" name="des_prod"
+        [(ngModel)]="nuevoProducto.descripcion" />
+    </div>
+    <div class="col-12" *ngIf="edit == true">
+      <label for="pre_prod" class="form-label">Precio</label>
+      <input type="number" class="form-control" placeholder="0" id="pre_prod" name="pre_prod"
+        [(ngModel)]="nuevoProducto.precio" />
+    </div>
+    <div class="col-12">
+      <label for="url_prod" class="form-label">Url Imagen</label>
+      <input type="text" class="form-control" placeholder="Url Imagen" id="url_prod" name="url_prod"
+        [(ngModel)]="nuevoProducto.urlImagen" />
+    </div>
 
-      <div class="col-12">
-        <label for="fec_prod" class="form-label">Fecha de vencimiento</label>
-        <input type="text" class="form-control" placeholder="Fecha de Vencimiento"
-        id="fec_prod"  name="fec_prod" [(ngModel)]="nuevoProducto.fechaVen">
-      </div>
+    <div class="col-12">
+      <label for="fec_prod" class="form-label">Fecha de vencimiento</label>
+      <input type="text" class="form-control" placeholder="Fecha de Vencimiento" id="fec_prod" name="fec_prod"
+        [(ngModel)]="nuevoProducto.fechaVen" />
+    </div>
 
-      <div class="col-12">
-        <label for="inputState" class="form-label">Categoria</label>
-        <select class="form-select"
-          id="idcategoria"  name="idcategoria" [(ngModel)]="nuevoProducto.categoria">
-          <option selected value="0">Seleccione...</option>
-          <option *ngFor="let categoria of categorias" [value]="categoria.id">{{categoria.nombre}}</option>
-        </select>
-      </div>
+    <div class="col-12">
+      <label for="inputState" class="form-label">Categoria</label>
+      <select class="form-select" id="idcategoria" name="idcategoria" [(ngModel)]="nuevoProducto.categoria.id">
+        <option selected value="0">Seleccione...</option>
+        <option *ngFor="let categoria of categorias" [value]="categoria.id">
+          {{ categoria.nombre }}
+        </option>
+      </select>
+    </div>
 
-      <div class="col-12">
-        <label for="inputState" class="form-label">Proveedor</label>
-        <select class="form-select"
-          id="idProveedor"  name="idProveedor" [(ngModel)]="nuevoProducto.proveedor">
-          <option selected value="0">Seleccione...</option>
-          <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{proveedor.nombre}}</option>
-        </select>
-      </div>
+    <div class="col-12" *ngIf="edit == true">
+      <label for="desc_prod" class="form-label">Descuento</label>
+      <input type="number" class="form-control" placeholder="0" id="desc_prod" name="desc_prod"
+        [(ngModel)]="nuevoProducto.descuento" />
+    </div>
 
-      <div class="col-12">
-        <label for="active" class="form-label">Active</label>
-        <input type="text" class="form-control" placeholder="Active"
-        id="active"  name="active" [(ngModel)]="nuevoProducto.active">
-      </div>
+    <div class="col-12" *ngIf="edit == false">
+      <label for="inputState" class="form-label">Proveedor</label>
+      <select class="form-select" id="idproveedor" name="idproveedor" 
+      [(ngModel)]="nuevoProducto.lotes[0].proveedor.id">
+        <option selected value="0">Seleccione...</option>
+        <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">
+          {{ proveedor.nombre }}
+        </option>
+      </select>
+    </div>
 
-      <div class="col-12">
-        <button type="submit" class="btn btn-primary">Registrar</button>
-      </div>
-    </form>
-  </div>
+    <div class="col-12" *ngIf="edit == false">
+      <label for="pre_lote" class="form-label">Precio del Lote</label>
+      <input type="number" class="form-control" placeholder="0" id="pre_lote" name="pre_lote"
+        [(ngModel)]="nuevoProducto.lotes[0].precio" />
+    </div>
+
+    <div class="col-12" *ngIf="edit == false">
+      <label for="stock_lote" class="form-label">Stock del Lote</label>
+      <input type="number" class="form-control" placeholder="0" id="stock_lote" name="stock_lote"
+        [(ngModel)]="nuevoProducto.lotes[0].stock" />
+    </div>
+    
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Registrar</button>
+    </div>
+  </form>
+</div>

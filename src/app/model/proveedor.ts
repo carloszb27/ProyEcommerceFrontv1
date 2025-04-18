@@ -1,8 +1,9 @@
-export interface Proveedor {
+export class Proveedor {
     id: number
-    nombre: string
-    correo: string
-    numTelefono: string
-    direccion: string
-    active: boolean
-} 
+    nombre?: string
+
+    constructor(id: number, nombre: string) {  
+        this.id = id;
+        this.nombre = nombre;
+    }
+}

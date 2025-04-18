@@ -1,0 +1,33 @@
+
+<br>
+
+<button class="btn btn-primary" routerLink="/lote/agregar" >Registrar Lote</button>
+
+<br>
+<br>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Stock</th>
+      <th scope="col">Producto</th>
+      <th scope="col">Proveedor</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let lote of lotes">
+      <th scope="row">{{lote.id}}</th>
+      <td>{{lote.precio}}</td>
+      <td>{{lote.stock}}</td>
+      <td>{{lote?.producto?.nombre}}</td>
+      <td>{{lote.proveedor?.nombre}}</td>
+      <td><a class="btn btn-primary" [routerLink]="['/lote/editar', lote.id]">Editar</a></td>
+                <td><button class="btn btn-danger" (click)="lote.id != null && eliminarLote(lote.id)">
+                        Eliminar
+                    </button></td>
+    </tr>
+  </tbody>
+</table>

@@ -3,6 +3,7 @@ import { PaginaPrincipalComponent } from "../pagina-principal/pagina-principal.c
 import { Router, RouterModule } from '@angular/router';
 import { ProductoService } from '../service/producto.service';
 import { CommonModule } from '@angular/common';
+import { Producto } from '../model/producto';
 
 @Component({
   selector: 'app-listar-productos',
@@ -13,7 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ListarProductosComponent implements OnInit{
 
-  productos: any[] = [];
+  productos: Producto[] = [];
 
   constructor(private productoService: ProductoService, private router: Router) {
 
@@ -24,6 +25,7 @@ export class ListarProductosComponent implements OnInit{
   }
 
   cargarProductos(): void {
+
     this.productoService.lista().subscribe(
       (data: any) => {
       this.productos = data;
@@ -32,18 +34,19 @@ export class ListarProductosComponent implements OnInit{
     });
   }
 
-
-/*
-  cargarProductos(): void {
-    this.productoService.listaProductos().subscribe(
-      data => { this.productos = data},
-      error => { console.log('Error al obtener los productos: ', error); }
-      );
-  }
-*/
-
   eliminarProducto(id: number): void {
-    
+    this.productoService.eliminar(id)
+      .subscribe(
+        res => {
+          console.log(res);
+          this.cargarProductos();
+        },
+        err => {
+          console.error(err)
+          this.router.navigated = false;
+          this.router.navigate([this.router.url]);
+        }
+      )
   }
 
 }
