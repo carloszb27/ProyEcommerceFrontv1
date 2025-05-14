@@ -2,18 +2,19 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Lote } from '../model/lote';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoteService {
 
-    private baseUrl: string = 'http://localhost:8083/api/v1/lote';
+    private baseUrl: string = `${environment.apiUrl}/lote`;;
     
     constructor(private http:HttpClient) { }
     
-    public lista(): Observable<Lote[]> {
-      return this.http.get<Lote[]>(this.baseUrl);
+    public lista(): Observable<Lote> {
+      return this.http.get<Lote>(this.baseUrl);
     }
   
     public registrar(lote: Lote): Observable<any> {

@@ -1,0 +1,79 @@
+
+<div class="col-md6 offset-md-3" style="margin: 0 auto">
+  <h4 class="text-center">{{edit ? 'Editar producto' : 'Registrar producto'}}</h4>
+<form (ngSubmit)="registrarProducto()">
+  <div class="form-group">
+    <label for="nom_prod" class="form-label">Nombre</label>
+    <input type="text" class="form-control" placeholder="Ingrese el nombre" id="nom_prod" name="nom_prod"
+      [(ngModel)]="nuevoProducto.nombre" required minlength="4" maxlength="30" #ngModel = "ngModel" />
+  </div>
+  
+  <div class="form-group">
+    <label for="des_prod" class="form-label">Descripcion</label>
+    <input type="text" class="form-control" placeholder="Ingrese la descripcion" id="des_prod" name="des_prod"
+      [(ngModel)]="nuevoProducto.descripcion" />
+  </div>
+  <div class="form-group" *ngIf="edit == true">
+    <label for="pre_prod" class="form-label">Precio</label>
+    <input type="number" class="form-control" placeholder="Ingrese el precio" id="pre_prod" name="pre_prod"
+      [(ngModel)]="nuevoProducto.precio" />
+  </div>
+  
+  <div class="form-group">
+    <label for="url_prod" class="form-label">Url Imagen</label>
+    <input type="text" class="form-control" placeholder="Ingrese la Url de la Imagen" id="url_prod" name="url_prod"
+      [(ngModel)]="nuevoProducto.urlImagen" />
+  </div>
+
+  <div class="form-group">
+    <label for="fec_prod" class="form-label">Fecha de vencimiento</label>
+    <input type="string" class="form-control" placeholder="Ingrese la Fecha de Vencimiento" id="fec_prod" name="fec_prod"
+      [(ngModel)]="nuevoProducto.fechaVen" />
+  </div>
+
+  <div class="form-group">
+    <label for="inputState" class="form-label">Categoria</label>
+    <select class="form-select" id="idcategoria" name="idcategoria" [(ngModel)]="nuevoProducto.categoriaId">
+      <option selected value="0">Seleccione...</option>
+      <option *ngFor="let categoria of categorias" [value]="categoria.id">
+        {{ categoria.nombre }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group" *ngIf="edit == true">
+    <label for="desc_prod" class="form-label">Descuento</label>
+    <input type="number" class="form-control" placeholder="Ingrese el descuento: %" id="desc_prod" name="desc_prod"
+      [(ngModel)]="nuevoProducto.descuento" />
+  </div>
+
+  <div class="form-group" *ngIf="edit == false">
+    <label for="inputState" class="form-label">Proveedor</label>
+    <select class="form-select" id="idproveedor" name="idproveedor" [(ngModel)]="nuevoProducto.proveedorId">
+      <option selected value="0">Seleccione...</option>
+      <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">
+        {{ proveedor.nombre }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group" *ngIf="edit == false">
+    <label for="pre_lote" class="form-label">Precio del Lote</label>
+    <input type="number" class="form-control" placeholder="Ingrese el precio del lote" id="pre_lote" name="pre_lote"
+      [(ngModel)]="nuevoProducto.precioLote" />
+  </div>
+
+  <div class="form-group" *ngIf="edit == false">
+    <label for="stock_lote" class="form-label">Stock del Lote</label>
+    <input type="number" class="form-control" placeholder="Ingrese el stock del lote" id="stock_lote" name="stock_lote"
+      [(ngModel)]="nuevoProducto.stock" />
+  </div>
+
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Registrar</button>
+    <button class="btn btn-danger" style="margin-left: 25px;" routerLink="/producto/listado">Cancelar</button>
+  </div>
+
+</form>
+</div>

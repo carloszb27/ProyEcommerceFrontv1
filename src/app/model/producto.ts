@@ -5,15 +5,18 @@ export class Producto {
     id?: number;
     nombre: string;
     descripcion: string;
-    precio: number;
+    precio?: number;
     urlImagen: string;
     fechaVen: string;
-    categoria: Categoria;
-    lotes: Lote[];
+    categoria?: Categoria;
+    categoriaId?: number;
+    precioLote?: number;
+    lote?: Lote;
+    stock?: number;
+    proveedorId?: number;
     descuento?: number;
-    active?: boolean;
 
-    constructor(id: number, nombre: string, descripcion: string, precio: number, urlImagen: string, fechaVen: string, categoria: Categoria, lotes: Lote[], descuento: number, active: boolean) {
+    constructor(id: number, nombre: string, descripcion: string, precio: number, urlImagen: string, fechaVen: string, categoria: Categoria, categoriaId: number, precioLote: number, lote: Lote, stock: number, proveedorId: number, descuento: number) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -21,9 +24,12 @@ export class Producto {
         this.urlImagen = urlImagen;
         this.fechaVen = fechaVen;
         this.categoria = categoria;
-        this.lotes = lotes;
+        this.categoriaId = categoriaId;
+        this.precioLote = precioLote;
+        this.lote = lote;
+        this.stock = stock;
+        this.proveedorId = proveedorId;
         this.descuento = descuento;
-        this.active = active;
     }
 
 }

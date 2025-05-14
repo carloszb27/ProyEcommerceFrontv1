@@ -1,0 +1,47 @@
+
+<h2>Lista de productos</h2>
+
+<br>
+
+<button class="btn btn-primary" routerLink="/producto/agregar" >Registrar Producto</button>
+
+<br>
+<br>
+
+<div class="table-responsive">
+  <table class="table table-hover mx-auto">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Imagen</th>
+        <th scope="col">Fecha de vencimiento</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Descuento</th>
+        <th scope="col">Acciones</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productos">
+        <th scope="row">{{producto.id}}</th>
+        <td>{{producto.nombre}}</td>
+        <td>{{producto.descripcion}}</td>
+        <td>{{producto.precio}}</td>
+        <td></td>
+        <!-- <td> <img src="{{producto.urlImagen}}" alt="Imagen no encontrada" width="80%"> </td> -->
+        <td>{{producto.fechaVen}}</td>
+        <td>{{producto?.categoria?.nombre}}</td>
+        <td>{{producto?.stock}}</td>
+        <td>{{ producto.descuento == 0 ? 'No Hay descuento' : (producto.descuento + '%')}} </td>
+        <td><a class="btn btn-primary" [routerLink]="['/producto/editar', producto.id]">Editar</a></td>
+                  <td><button class="btn btn-danger" (click)="producto.id != null && eliminarProducto(producto.id)">
+                          Eliminar
+                      </button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

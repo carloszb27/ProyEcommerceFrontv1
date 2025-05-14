@@ -1,0 +1,15 @@
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+th, td {
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    vertical-align: top;
+}
+
+tbody tr:hover {
+    cursor: pointer;
+}

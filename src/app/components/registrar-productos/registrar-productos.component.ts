@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { ProductoService } from '../service/producto.service';
-import { CategoriaService } from '../service/categoria.service';
-
-import { Categoria } from '../model/categoria';
-import { Lote } from '../model/lote';
-import { Producto } from '../model/producto';
 import { FormsModule } from '@angular/forms';
-import { Proveedor } from '../model/proveedor';
-import { ProveedorService } from '../service/proveedor.service';
+import { Categoria } from '../../model/categoria';
+import { Proveedor } from '../../model/proveedor';
+import { Producto } from '../../model/producto';
+import { CategoriaService } from '../../service/categoria.service';
+import { ProveedorService } from '../../service/proveedor.service';
+import { ProductoService } from '../../service/producto.service';
+import { Response } from '../../model/response';
+
 
 @Component({
   selector: 'app-registrar-productos',
@@ -22,36 +22,42 @@ export class RegistrarProductosComponent implements OnInit{
   
   categorias: Categoria[] = [];
 
-  lotes: Lote[] = [];
+  //lotes: Lote[] = [];
 
   proveedores: Proveedor[] = [];
 
   nuevoProducto: Producto = {
+    "id": 0,
     "nombre": '',
     "descripcion": '',
-    "precio": 0,
+    "precio": 0.0,
     "urlImagen": '',
     "fechaVen": '',
-    "categoria": {id: 0},
-    "lotes": [
+    "categoriaId": 0,//{id: 0},
+    /* "lote":
         {
             "precio": 0.0,
             "stock": 0,
             "proveedor": {
                 "id": 0
             }
-        }
-    ]
+        } */
+    "precioLote": 0.0,
+    "stock": 0,
+    "descuento": 0.0,
+    "proveedorId": 0
   };
 
   productoaActualizar: any = {
     "id": 0,
     "nombre": '',
     "descripcion": '',
-    "precio": 0,
+    "precio": 0.0,
     "urlImagen": '',
     "fechaVen": '',
-    "categoria": {id: 0},
+    //"categoria": {id: 0},
+    "categoriaId": 0,
+    "stock": 0,
     "descuento": 0.0
   };
 
@@ -66,12 +72,12 @@ export class RegistrarProductosComponent implements OnInit{
 
   ngOnInit(): void {
     this.categoriaService.lista().subscribe(
-      data => { this.categorias = data },
+      (data:any) => { this.categorias = data },
       error => { console.log('Error al obtener las categorias: ', error); }
     );
 
     this.proveedorService.lista().subscribe(
-      data => { this.proveedores = data },
+      (data:any) => { this.proveedores = [...data.contenido];},
       error => { console.log('Error al obtener los proveedores: ', error); }
     );
 
@@ -79,9 +85,10 @@ export class RegistrarProductosComponent implements OnInit{
     if (params['id']) {
       this.productoService.buscar(params['id'])
         .subscribe(
-          res => {
+          (res:Response) => {
             console.log(res);
-            this.nuevoProducto = res;
+            this.nuevoProducto = res.contenido;
+            this.nuevoProducto.categoriaId = res.contenido.categoria.id;
             this.edit = true;
           },
           err => console.log(err)
@@ -98,23 +105,20 @@ export class RegistrarProductosComponent implements OnInit{
 
     this.productoService.registrar(this.nuevoProducto).
       subscribe(response => {
+
         console.log('Producto registrado con éxito:', response);
         this.nuevoProducto = {
+          "id": 0,
           "nombre": '',
           "descripcion": '',
-          "precio": 0,
+          "precio": 0.0,
           "urlImagen": '',
           "fechaVen": '',
-          "categoria": {id: 0},
-          "lotes": [
-              {
-                  "precio": 0.0,
-                  "stock": 0,
-                  "proveedor": {
-                      "id": 0
-                  }
-              }
-          ]
+          "categoriaId": 0,
+          "precioLote": 0.0,
+          "stock": 0,
+          "descuento": 0.0,
+          "proveedorId": 0
         };
         this.router.navigate(['/producto/listado']);
       },

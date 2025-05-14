@@ -2,39 +2,41 @@ import { Injectable } from '@angular/core';
 import { Producto } from '../model/producto';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Response } from '../model/response';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoService {
 
-  private baseUrl: string = 'http://localhost:8083/api/v1/producto';
+  private baseUrl: string = `${environment.apiUrl}/producto`;;
   
   constructor(private http:HttpClient) { }
   
-  public lista(): Observable<Producto[]> {
-    return this.http.get<Producto[]>(this.baseUrl);
+  public lista(): Observable<Response[]> {
+    return this.http.get<Response[]>(this.baseUrl);
   }
 
-  public listarPorLote(id_lote: number): Observable<Producto> {
-    return this.http.get<Producto>(`${this.baseUrl}/lote/${id_lote}`);
+  public listarPorLote(id_lote: number): Observable<Response> {
+    return this.http.get<Response>(`${this.baseUrl}/lote/${id_lote}`);
   }
 
-  public registrar(producto: Producto): Observable<any> {
-    return this.http.post<any>(this.baseUrl, producto);
+  public registrar(producto: Producto): Observable<Response> {
+    return this.http.post<Response>(this.baseUrl, producto);
   }
 
-  public buscar(id_prod: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id_prod}`);
+  public buscar(id_prod: number): Observable<Response> {
+    return this.http.get<Response>(`${this.baseUrl}/${id_prod}`);
   }
 
 
-  public actualizar(producto: Producto): Observable<Object> {
-    return this.http.put(`${this.baseUrl}`, producto);
+  public actualizar(producto: Producto): Observable<Response> {
+    return this.http.put<Response>(`${this.baseUrl}`, producto);
   }
 
-  public eliminar(id_prod: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id_prod}`);
+  public eliminar(id_prod: number): Observable<Response> {
+    return this.http.delete<Response>(`${this.baseUrl}/${id_prod}`);
   }
   
 

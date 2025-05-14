@@ -1,0 +1,16 @@
+<h4>Productos</h4>
+
+<div *ngFor="let producto of productos" class="card" style="width: 18rem; margin: 10px; border: 1px solid #ccc; border-radius: 5px; padding: 10px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); display: inline-block;">
+    <img src= "" width="50%" alt="Imagen no encontrada">
+    <h5>{{producto.nombre}}</h5>
+    <h6>{{producto.descripcion}}</h6>
+    <h6>Precio: {{producto.precio}}</h6>
+</div>
+
+<h4>Categorias</h4>
+
+<div *ngFor="let categoria of categorias" style="padding: 10px;">
+    <a>{{categoria.nombre}}</a>
+</div>
+
+<h4>Ofertas</h4>

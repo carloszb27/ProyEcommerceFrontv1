@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { Lote } from '../model/lote';
-import { LoteService } from '../service/lote.service';
-import { Producto } from '../model/producto';
-import { ProductoService } from '../service/producto.service';
+import { LoteService } from '../../service/lote.service';
+import { ProductoService } from '../../service/producto.service';
+import { Producto } from '../../model/producto';
 
 @Component({
   selector: 'app-listar-lotes',
@@ -15,7 +14,7 @@ import { ProductoService } from '../service/producto.service';
 })
 export class ListarLotesComponent implements OnInit{
 
-  lotes: any[] = [];
+  lote: any[] = [];
 
   productos: Producto[] = [{
     nombre: '',
@@ -23,27 +22,26 @@ export class ListarLotesComponent implements OnInit{
     precio: 0,
     urlImagen: '',
     fechaVen: '',
-    categoria: {},
-    lotes: []
+    categoriaId: 0,
+    lote: {
+    }
   }];
 
   constructor(private loteService: LoteService, private productoService: ProductoService, private router: Router) { }
 
   ngOnInit(): void {
-    this.cargarLotes();
+    //this.cargarLotes();
 
   }
-
+/*
   cargarLotes(): void {
 
     this.loteService.lista().subscribe(
       (data: any) => {
-      this.lotes = data;
-
-      this.lotes.forEach(lote => lote.producto = null)
+      this.lote = data;
 
       this.cargarProductosPorLote()
-/*
+
       this.lotes.forEach(lote => {
         this.productos.forEach(producto => {
           if (lote?.id === producto.lotes[0]?.id) {
@@ -52,7 +50,7 @@ export class ListarLotesComponent implements OnInit{
         });
 
       })
-*/
+
       //console.log(this.lotes);
     }, (error: any) => {
       console.error('Error al cargar los lotes', error);
@@ -61,41 +59,15 @@ export class ListarLotesComponent implements OnInit{
 
   cargarProductosPorLote(): void {
 
-    this.lotes.forEach(lote => {
-
       this.productoService.listarPorLote(lote.id).subscribe(
         (data: any) => {
           
           lote.producto = data || null;
 
-          /*
-          lote.producto = producto || null;
           
-          this.productos.forEach(producto => {
-            if (lote?.id === producto.lotes[0]?.id) {
-              lote.producto = producto;
-            }
-          });
-          */
-
-          //console.log(this.productos);
         }, (error: any) => {
           console.error('Error al cargar los productos por lote', error);
         });
-
-      
-    })
-
-    /*
-    this.lotes.forEach(lote => {
-        this.productos.forEach(producto => {
-          if (lote?.id === producto.lotes[0]?.id) {
-            lote.producto = producto;
-          }
-        });
-    */
-
-
 
   }
 
@@ -113,5 +85,5 @@ export class ListarLotesComponent implements OnInit{
         }
       )
   }
-
+*/
 }

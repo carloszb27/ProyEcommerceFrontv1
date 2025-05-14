@@ -7,7 +7,7 @@
 <br>
 
 <table class="table table-hover">
-  <thead>
+  <thead class="table-dark">
     <tr>
       <th scope="col">Id</th>
       <th scope="col">Precio</th>
@@ -15,10 +15,11 @@
       <th scope="col">Producto</th>
       <th scope="col">Proveedor</th>
       <th scope="col">Acciones</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let lote of lotes">
+    <!-- <tr *ngFor="let lote of lotes">
       <th scope="row">{{lote.id}}</th>
       <td>{{lote.precio}}</td>
       <td>{{lote.stock}}</td>
@@ -28,6 +29,6 @@
                 <td><button class="btn btn-danger" (click)="lote.id != null && eliminarLote(lote.id)">
                         Eliminar
                     </button></td>
-    </tr>
+    </tr> -->
   </tbody>
 </table>
